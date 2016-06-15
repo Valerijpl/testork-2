@@ -1,0 +1,100 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers/MainController.js"></script>
+  <script src="js/Script.js"></script>
+  <link href="css/main.css" rel="stylesheet" />
+</head>
+<body>
+  <body ng-app="myApp">
+   <div class="header">
+     <div class="container">
+       <h1>Book End</h1>
+     </div>
+   </div>
+
+   <div class="main" ng-controller="MainController">
+    <div class="container">
+      <h1>{{ title }}</h1>
+      <h2>{{ promo }}</h2>
+    </div>
+
+<select ng-model="filterAnswersBy">
+  <option value="all">All
+  <option value="with-answers">With answers
+  <option value="without-answers">Without answers
+</select>
+
+<div ng-switch="filterAnswersBy">
+  <div ng-switch-when="all">
+     <div ng-repeat="product in products" class="col-md-6">
+      <div class="thumbnail">
+        <p class="title">{{ product.name }}</p>
+        <p class="date">{{ product.pubdate | date }}</p>
+        <div class="rating">
+       <p class="likes" ng-click="plusOne($index)">+ {{ product.likes }} </p>
+       <p class="answers" ng-click="plusOne($index)"> {{ product.answers }}</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  </div>
+  <div ng-switch="filterAnswersBy">
+    <div ng-switch-when="without-answers">
+         <div ng-repeat="product in products" class="col-md-6">
+
+          <div ng-if="product.answers == 0">
+            <div class="thumbnail">
+              <p class="title">{{ product.name }}</p>
+              <p class="date">{{ product.pubdate | date }}</p>
+              <div class="rating">
+             <p class="likes" ng-click="plusOne($index)">+ {{ product.likes }} </p>
+             <p class="answers" ng-click="plusOne($index)"> {{ product.answers }}</p>
+            </div>
+
+          </div>
+
+      </div>
+
+      </div>
+
+
+
+      </div>
+      <div ng-switch="filterAnswersBy">
+        <div ng-switch-when="with-answers">
+             <div ng-repeat="product in products" class="col-md-6">
+
+              <div ng-if="product.answers > 0">
+                <div class="thumbnail">
+                  <p class="title">{{ product.name }}</p>
+                  <p class="date">{{ product.pubdate | date }}</p>
+                  <div class="rating">
+                 <p class="likes" ng-click="plusOne($index)">+ {{ product.likes }} </p>
+                 <p class="answers" ng-click="plusOne($index)"> {{ product.answers }}</p>
+                </div>
+
+              </div>
+
+          </div>
+
+          </div>
+
+
+
+          </div>
+
+
+   <div class="footer">
+     <div class="container">
+     </div>
+   </div>
+
+</body>
+</html>
